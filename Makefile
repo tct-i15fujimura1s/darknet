@@ -28,6 +28,7 @@ OPTS=-Ofast
 LDFLAGS= -lm -pthread 
 COMMON= -Iinclude/ -Isrc/
 CFLAGS=-Wall -Wno-unused-result -Wno-unknown-pragmas -Wfatal-errors -fPIC
+CPPFLAGS=-std=c++11
 
 ifeq ($(OPENMP), 1) 
 CFLAGS+= -fopenmp
@@ -83,7 +84,7 @@ $(SLIB): $(OBJS)
 	$(CC) $(CFLAGS) -shared $^ -o $@ $(LDFLAGS)
 
 $(OBJDIR)%.o: %.cpp $(DEPS)
-	$(CPP) $(COMMON) $(CFLAGS) -c $< -o $@
+	$(CPP) $(COMMON) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(OBJDIR)%.o: %.c $(DEPS)
 	$(CC) $(COMMON) $(CFLAGS) -c $< -o $@
